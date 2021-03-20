@@ -1,0 +1,102 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://img/asset.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[node name="tileset01" type="Node2D"]
+
+[node name="grass" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 64, 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="grass"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="grass/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="dirt01" type="Sprite" parent="."]
+position = Vector2( 72, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 64, 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="dirt01"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dirt01/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="dirt02" type="Sprite" parent="."]
+position = Vector2( 144, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="dirt02"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dirt02/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="brick" type="Sprite" parent="."]
+position = Vector2( 0, 80 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 64, 64, 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="brick"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="brick/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="platformMove" type="Sprite" parent="."]
+position = Vector2( 72, 80 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 64, 64, 64, 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="platformMove"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platformMove/StaticBody2D"]
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="plateformStatic" type="Sprite" parent="."]
+position = Vector2( 144, 80 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 128, 64, 64, 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="plateformStatic"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="plateformStatic/StaticBody2D"]
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="flower" type="Sprite" parent="."]
+position = Vector2( 216, 80 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 192, 0, 64, 64 )
+__meta__ = {
+"_edit_group_": true
+}
