@@ -1,10 +1,14 @@
 extends KinematicBody2D
 
-var vel = Vector2()
-var max_speed = 200
+const MAX_SPEED = 200
 const GRAVITY = 1000
 const UP = Vector2(0, -1)
 const ACCEL = 5
+
+var vel = Vector2()
+var jump_count = 0
+var bullet_dir = 1
+var bullet = preload("res://scene/bullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,37 +21,57 @@ func _process(delta):
 
 # execute 60 tick par seconde
 func _physics_process(delta):
-	#vel.x = 0
 	mouvement_loop()
+	animation_loop()
 	vel.y += GRAVITY * delta
-	
 	
 	vel = move_and_slide(vel, UP)
 
 func mouvement_loop():
+	if is_on_floor():
+		jump_count = 0
+	
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
-	var jump = Input.is_action_just_pressed("ui_accept")
+	var jump = Input.is_action_just_pressed("ui_up")
+	var shoot = Input.is_action_just_pressed("ui_accept")
+	
 	var dirx = int(right) - int(left)
 	
 	if dirx == -1 : # gauche
-		vel.x = max(vel.x - ACCEL, -max_speed)
+		vel.x = max(vel.x - ACCEL, -MAX_SPEED)
+		bullet_dir = -1
+		$muzzle.position.x = -20
 		$Sprite.flip_h = true
-		play_anim("walk")
 	elif dirx == 1 : # droite
-		vel.x = min(vel.x + ACCEL, max_speed)
+		vel.x = min(vel.x + ACCEL, MAX_SPEED)
+		bullet_dir = 1
 		$Sprite.flip_h = false
-		play_anim("walk")
+		$muzzle.position.x = 10
 	else:
 		vel.x = lerp(vel.x, 0, 0.15)
-		play_anim("idle")
 		
-	if jump == true and is_on_floor():
-		vel.y = -700
+	if jump == true and jump_count < 2:
+		vel.y = -600
+		jump_count += 1
+		
+	if shoot:
+		play_anim("shoot")
+		var b = bullet.instance()
+		b.start($muzzle.global_position, bullet_dir)
+		get_parent().add_child(b)
+
+func animation_loop():
+	if vel.x != 0:
+		print(vel.x)
+		play_anim("walk")
+	elif :
+		print("Passage en idle")
+		play_anim("idle")
 		
 	if vel.y < 0:
 		play_anim("jump up")
-	if vel.y > 0:
+	elif vel.y > 0:
 		play_anim("jump_down")
 
 func play_anim(animation):

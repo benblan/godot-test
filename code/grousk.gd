@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 var vel = Vector2()
+var life = 100
 export var max_speed = 150
 const GRAVITY = 1000
 const UP = Vector2(0, -1)
@@ -56,3 +57,8 @@ func _on_Timer_timeout():
 		dirx = 1
 	else :
 		dirx = 0
+		
+func hit(damage):
+	life -= damage
+	if life <= 0:
+		queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://img/spoony.png" type="Texture" id=1]
 [ext_resource path="res://code/player.gd" type="Script" id=2]
@@ -55,7 +55,21 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-resource_name = "walk"
+resource_name = "shoot"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=6]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -72,7 +86,7 @@ tracks/0/keys = {
 }
 
 [node name="player" type="KinematicBody2D"]
-position = Vector2( 232, 96 )
+position = Vector2( 232.595, 95.7027 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -81,6 +95,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 12
+frame = 3
 region_rect = Rect2( 192, 64, 64, 64 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -95,4 +110,8 @@ smoothing_enabled = true
 anims/idle = SubResource( 2 )
 "anims/jump up" = SubResource( 3 )
 anims/jump_down = SubResource( 4 )
-anims/walk = SubResource( 5 )
+anims/shoot = SubResource( 5 )
+anims/walk = SubResource( 6 )
+
+[node name="muzzle" type="Position2D" parent="."]
+position = Vector2( 10, 4 )
