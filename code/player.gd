@@ -49,7 +49,7 @@ func mouvement_loop():
 		$Sprite.flip_h = false
 		$muzzle.position.x = 10
 	else:
-		vel.x = lerp(vel.x, 0, 0.15)
+		vel.x = lerp(vel.x, 0, 0.3)
 		
 	if jump == true and jump_count < 2:
 		vel.y = -600
@@ -62,17 +62,24 @@ func mouvement_loop():
 		get_parent().add_child(b)
 
 func animation_loop():
-	if vel.x != 0:
-		print(vel.x)
+	if vel.x > 0.001 or vel.x < -0.001:
+		#print(vel.x)
 		play_anim("walk")
-	elif :
-		print("Passage en idle")
+	else:
+		#print("Passage en idle")
 		play_anim("idle")
 		
 	if vel.y < 0:
 		play_anim("jump up")
 	elif vel.y > 0:
 		play_anim("jump_down")
+		
+	if vel.y != 0:
+		$cam.zoom.x = lerp($cam.zoom.x, 1.2, 0.015)
+		$cam.zoom.y = lerp($cam.zoom.y, 1.2, 0.015)
+	else:
+		$cam.zoom.x = lerp($cam.zoom.x, 0.8, 0.015)
+		$cam.zoom.y = lerp($cam.zoom.y, 0.8, 0.015)
 
 func play_anim(animation):
 	if $anim.current_animation != animation:

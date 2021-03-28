@@ -86,7 +86,7 @@ tracks/0/keys = {
 }
 
 [node name="player" type="KinematicBody2D"]
-position = Vector2( 232.595, 95.7027 )
+position = Vector2( 120.575, 71.2053 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -102,7 +102,7 @@ region_rect = Rect2( 192, 64, 64, 64 )
 visible = false
 shape = SubResource( 1 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="cam" type="Camera2D" parent="."]
 current = true
 smoothing_enabled = true
 
